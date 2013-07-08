@@ -14,9 +14,13 @@ index_html = "http://students.flatironschool.com"
 scraper = Scraper.new
 scraper.scrape_index(index_html)
 scraper.scrape_students(index_html)
-pp scraper.students
+# pp scraper.students
+pp scraper.students.size
+
+Student.delete_all
 
 scraper.students.each do |s|
+  pp s
   Student.create(:name     => s[1][:name], 
                  :url      => s[1][:url],
                  :img      => s[1][:img],

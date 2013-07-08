@@ -44,7 +44,7 @@
 
 
 
-<!-- # views/students/students.erb -->
+<!-- # views/students/index.html.erb -->
 
 
 <!-- Begin Title Content -->
@@ -66,17 +66,20 @@
 
   <div class="section section-blog">
     <div class="home-blog clearfix">
-
       <ul>
 
         <% @students.each do |student| %>
           <li class="home-blog-post">
             <div class="blog-thumb">
-              <img width="360" height="140" src="<%= student.img %>" class="attachment-blog-thumb wp-post-image" alt="">
+              <%=  link_to image_tag("#{student.img}", :width => 360, :height => 140, :class => "attachment-blog-thumb wp-post-image"), student %>
             </div>
 
             <div class="blog-title">
-              <div class="big-comment"><h3><%= link_to "#{student.name}", student %></h3></div>
+              <div class="big-comment">
+                <h3><%= link_to "#{student.name}", student %></h3>
+                <%= link_to 'Edit', edit_student_path(student) %>
+              | <%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
               <p class="home-blog-post-meta"><%= student.tagline %></p>
             </div>
             <div class="clear"></div>
@@ -85,13 +88,13 @@
               <p><%= student.bio %></p>
             </div>
             <div class="clear"></div>
+
           </li>
         <% end %>
 
       </ul>
     </div>
   </div>
-
 
 
 </div>
